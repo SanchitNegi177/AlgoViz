@@ -78,14 +78,16 @@ export const sjf = (processes) => {
   
   while (completedProcesses.size < processes.length) {
     // Find available processes that have arrived but not completed
+    const time = currentTime; // Store current time in a variable to avoid closure issue
     const availableProcesses = processesWithArrival.filter(p => 
-      p.arrival_time <= currentTime && !completedProcesses.has(p.process_id)
+      p.arrival_time <= time && !completedProcesses.has(p.process_id)
     );
     
     if (availableProcesses.length === 0) {
       // No processes available, jump to next arrival time
+      const time = currentTime; // Store current time in a variable to avoid closure issue
       const nextArrival = processesWithArrival
-        .filter(p => p.arrival_time > currentTime)
+        .filter(p => p.arrival_time > time)
         .sort((a, b) => a.arrival_time - b.arrival_time)[0];
       
       if (nextArrival) {
@@ -170,14 +172,16 @@ export const srtf = (processes) => {
   // Continue until all processes are completed
   while (processesWithArrival.some(p => p.remaining_time > 0)) {
     // Find available processes at current time
+    const time = currentTime; // Store current time in a variable to avoid closure issue
     const availableProcesses = processesWithArrival.filter(p => 
-      p.arrival_time <= currentTime && p.remaining_time > 0
+      p.arrival_time <= time && p.remaining_time > 0
     );
     
     if (availableProcesses.length === 0) {
       // No processes available, jump to next arrival time
+      const time = currentTime; // Store current time in a variable to avoid closure issue
       const nextArrival = processesWithArrival
-        .filter(p => p.arrival_time > currentTime && p.remaining_time > 0)
+        .filter(p => p.arrival_time > time && p.remaining_time > 0)
         .sort((a, b) => a.arrival_time - b.arrival_time)[0];
       
       if (nextArrival) {
@@ -365,14 +369,16 @@ export const priorityScheduling = (processes, isPreemptive = false) => {
     // Continue until all processes are completed
     while (processesWithArrival.some(p => p.remaining_time > 0)) {
       // Find available processes at current time
+      const time = currentTime; // Store current time in a variable to avoid closure issue
       const availableProcesses = processesWithArrival.filter(p => 
-        p.arrival_time <= currentTime && p.remaining_time > 0
+        p.arrival_time <= time && p.remaining_time > 0
       );
       
       if (availableProcesses.length === 0) {
         // No processes available, jump to next arrival time
+        const time = currentTime; // Store current time in a variable to avoid closure issue
         const nextArrival = processesWithArrival
-          .filter(p => p.arrival_time > currentTime && p.remaining_time > 0)
+          .filter(p => p.arrival_time > time && p.remaining_time > 0)
           .sort((a, b) => a.arrival_time - b.arrival_time)[0];
         
         if (nextArrival) {

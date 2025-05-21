@@ -196,7 +196,6 @@ const DiskSchedulingAnimation = ({
   const [startingTrackValue, setStartingTrackValue] = useState(startingTrack);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithm);
   const [directionValue, setDirectionValue] = useState(spinDirection);
-  const [seekQueue, setSeekQueue] = useState([]);
   const [customInput, setCustomInput] = useState('');
   const [currentRequests, setCurrentRequests] = useState(requests);
   const canvasRef = useRef(null);
@@ -223,11 +222,206 @@ const DiskSchedulingAnimation = ({
     setStartingTrackInput(startingTrack.toString());
     setSelectedAlgorithm(algorithm);
     setDirectionValue(spinDirection);
-    setSeekQueue(requests.length > 0 ? requests.map(r => r.toString()).join(',') : '');
     setCurrentRequests(requests);
     setCustomInput('');
-    drawDiskSchedulingGraph();
+    
+    // Draw the initial graph
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      // Clear and redraw logic here
+      // This is just a placeholder - the actual drawing happens in the useEffect below
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
   }, [requests, trackSize, startingTrack, algorithm, spinDirection]);
+
+  // Use separate useEffect for drawing that depends on state changes
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, width, 400);
+
+    // Set up coordinate system and background
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, width, 400);
+    
+    // Draw title
+    ctx.fillStyle = "#666";
+    ctx.font = "12px Arial";
+    ctx.textAlign = "left";
+    ctx.fillText("Time", 10, 15);
+    
+    // Calculate the sequence based on the selected algorithm
+    const algorithmSequence = calculateSeekSequence(
+      selectedAlgorithm, 
+      currentRequests, 
+      startingTrackValue, 
+      trackSizeValue, 
+      directionValue
+    );
+    
+    // Calculate current steps to display based on animation progress
+    const validRequests = algorithmSequence.slice(0, currentStep + 1);
+    
+    // Draw algorithm name and status
+    if (validRequests.length > 0) {
+      ctx.fillStyle = "#f00";
+      ctx.fillText(`${selectedAlgorithm} (${currentRequests.length})`, 70, 15);
+    } else {
+      ctx.fillStyle = "#666";
+      ctx.fillText(`${selectedAlgorithm} (No entries)`, 70, 15);
+    }
+    
+    // Set up disk position scale
+    const margin = { top: 30, right: 30, bottom: 20, left: 50 };
+    const graphWidth = width - margin.left - margin.right;
+    
+    // Calculate scale based on track size
+    const maxTrack = trackSizeValue || 30;
+    
+    // Draw the timeline/track position scale
+    ctx.beginPath();
+    ctx.strokeStyle = "#666";
+    ctx.lineWidth = 1;
+    ctx.moveTo(margin.left, margin.top);
+    ctx.lineTo(width - margin.right, margin.top);
+    ctx.stroke();
+    
+    // Draw track numbers (every 5 positions)
+    const numTicks = Math.min(12, maxTrack); // Limit to reasonable number of ticks
+    const tickInterval = Math.ceil(maxTrack / numTicks);
+    
+    for (let i = 0; i <= maxTrack; i += tickInterval) {
+      const x = margin.left + (i / maxTrack) * graphWidth;
+      
+      // Draw tick
+      ctx.beginPath();
+      ctx.moveTo(x, margin.top - 5);
+      ctx.lineTo(x, margin.top + 5);
+      ctx.stroke();
+      
+      // Draw label
+      ctx.fillStyle = "#666";
+      ctx.font = "11px Arial";
+      ctx.textAlign = "center";
+      ctx.fillText(i.toString(), x, margin.top - 8);
+    }
+    
+    // Draw track ruler marks
+    ctx.beginPath();
+    ctx.strokeStyle = "#ddd";
+    
+    for (let i = 0; i <= maxTrack; i += tickInterval / 2) {
+      const x = margin.left + (i / maxTrack) * graphWidth;
+      ctx.moveTo(x, margin.top);
+      ctx.lineTo(x, 400 - margin.bottom);
+    }
+    ctx.stroke();
+
+    // If no seek positions are set, draw a hint message
+    if (currentRequests.length === 0) {
+      ctx.fillStyle = "#999";
+      ctx.font = "14px Arial";
+      ctx.textAlign = "center";
+      ctx.fillText("Enter seek positions and click 'Apply' or use 'Random' to generate positions", width / 2, 200);
+      
+      // Draw a marker for the starting track position
+      const startX = margin.left + (startingTrackValue / maxTrack) * graphWidth;
+      const startY = margin.top + 60;
+      
+      ctx.beginPath();
+      ctx.fillStyle = "#3b5bdb";
+      ctx.arc(startX, startY, 5, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.fillStyle = "#3b5bdb";
+      ctx.font = "12px Arial";
+      ctx.textAlign = "center";
+      ctx.fillText("Starting position", startX, startY - 10);
+      return;
+    }
+    
+    // Draw movement path with enhanced visibility
+    if (currentRequests.length > 0 && currentStep > 0) {
+      const points = [];
+      
+      // Add the starting track position as the first point
+      const startX = margin.left + (startingTrackValue / maxTrack) * graphWidth;
+      const startY = margin.top + 20;
+      points.push({ x: startX, y: startY, value: startingTrackValue });
+      
+      // Collect the points for the path
+      for (let i = 0; i < validRequests.length; i++) {
+        const y = margin.top + 20 + (i + 1) * 20; // Vertical spacing between points
+        const x = margin.left + (validRequests[i] / maxTrack) * graphWidth;
+        points.push({ x, y, value: validRequests[i] });
+      }
+      
+      // Draw connecting lines
+      ctx.beginPath();
+      ctx.strokeStyle = "red";
+      ctx.lineWidth = 1.5;
+      
+      for (let i = 0; i < points.length; i++) {
+        if (i === 0) {
+          ctx.moveTo(points[i].x, points[i].y);
+        } else {
+          ctx.lineTo(points[i].x, points[i].y);
+        }
+      }
+      ctx.stroke();
+      
+      // Draw the dots
+      for (let i = 0; i < points.length; i++) {
+        // Draw dot
+        ctx.beginPath();
+        ctx.fillStyle = i === 0 ? "#3b5bdb" : (i === points.length - 1 ? "red" : "#999");
+        ctx.arc(points[i].x, points[i].y, 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Draw label for starting point
+        if (i === 0) {
+          ctx.fillStyle = "#3b5bdb";
+          ctx.font = "10px Arial";
+          ctx.textAlign = "center";
+          ctx.fillText("Start", points[i].x, points[i].y - 8);
+        } else {
+          // Draw track numbers next to each point
+          ctx.fillStyle = "#666";
+          ctx.font = "10px Arial";
+          ctx.textAlign = "left";
+          ctx.fillText(points[i].value, points[i].x + 8, points[i].y + 4);
+        }
+        
+        // Draw small circle around the current position
+        if (i === points.length - 1) {
+          ctx.beginPath();
+          ctx.strokeStyle = "red";
+          ctx.arc(points[i].x, points[i].y, 5, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      }
+    } else if (currentRequests.length > 0) {
+      // Draw just the starting position when no steps have been taken
+      const startX = margin.left + (startingTrackValue / maxTrack) * graphWidth;
+      const startY = margin.top + 20;
+      
+      ctx.beginPath();
+      ctx.fillStyle = "#3b5bdb";
+      ctx.arc(startX, startY, 3, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.fillStyle = "#3b5bdb";
+      ctx.font = "10px Arial";
+      ctx.textAlign = "center";
+      ctx.fillText("Start", startX, startY - 8);
+    }
+  }, [currentStep, trackSizeValue, startingTrackValue, currentRequests, selectedAlgorithm, directionValue]);
 
   const startAnimation = () => {
     setIsPlaying(true);
@@ -359,24 +553,19 @@ const DiskSchedulingAnimation = ({
     return () => clearTimeout(timer);
   }, [isPlaying, currentStep, totalSteps, onAnimationComplete]);
 
-  useEffect(() => {
-    drawDiskSchedulingGraph();
-  }, [currentStep, trackSizeValue, startingTrackValue, currentRequests, selectedAlgorithm, directionValue]);
-
   const drawDiskSchedulingGraph = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     const width = canvas.width;
-    const height = canvas.height;
 
     // Clear canvas
-    ctx.clearRect(0, 0, width, height);
+    ctx.clearRect(0, 0, width, 400);
 
     // Set up coordinate system and background
     ctx.fillStyle = "#fff";
-    ctx.fillRect(0, 0, width, height);
+    ctx.fillRect(0, 0, width, 400);
     
     // Draw title
     ctx.fillStyle = "#666";
@@ -408,7 +597,6 @@ const DiskSchedulingAnimation = ({
     // Set up disk position scale
     const margin = { top: 30, right: 30, bottom: 20, left: 50 };
     const graphWidth = width - margin.left - margin.right;
-    const graphHeight = height - margin.top - margin.bottom;
     
     // Calculate scale based on track size
     const maxTrack = trackSizeValue || 30;
@@ -448,7 +636,7 @@ const DiskSchedulingAnimation = ({
     for (let i = 0; i <= maxTrack; i += tickInterval / 2) {
       const x = margin.left + (i / maxTrack) * graphWidth;
       ctx.moveTo(x, margin.top);
-      ctx.lineTo(x, height - margin.bottom);
+      ctx.lineTo(x, 400 - margin.bottom);
     }
     ctx.stroke();
 
@@ -457,7 +645,7 @@ const DiskSchedulingAnimation = ({
       ctx.fillStyle = "#999";
       ctx.font = "14px Arial";
       ctx.textAlign = "center";
-      ctx.fillText("Enter seek positions and click 'Apply' or use 'Random' to generate positions", width / 2, height / 2);
+      ctx.fillText("Enter seek positions and click 'Apply' or use 'Random' to generate positions", width / 2, 200);
       
       // Draw a marker for the starting track position
       const startX = margin.left + (startingTrackValue / maxTrack) * graphWidth;

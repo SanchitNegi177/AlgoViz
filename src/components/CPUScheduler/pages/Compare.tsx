@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Typography,
@@ -8,7 +8,6 @@ import {
   CircularProgress,
   Tab,
   Tabs,
-  FormControl,
   FormGroup,
   FormControlLabel,
   Checkbox,
@@ -16,33 +15,16 @@ import {
   ToggleButtonGroup,
   ToggleButton,
   TextField,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  InputLabel,
   Accordion,
   AccordionSummary,
   AccordionDetails,
   Divider,
-  Container,
-  FormLabel,
-  RadioGroup,
-  Radio,
-  Switch,
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableCell,
-  Tooltip
 } from '@mui/material';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import ViewWeekIcon from '@mui/icons-material/ViewWeek';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Process, AlgorithmResult } from '../services/SimpleApi.ts';
-import { api } from '../services/SimpleApi.ts';
-import SimpleProcessForm from '../components/SimpleProcessForm.tsx';
 import GanttChart from '../components/GanttChart.tsx';
 import ResultsTable from '../components/ResultsTable.tsx';
 import { 
@@ -54,11 +36,6 @@ import {
   Tooltip as RechartsTooltip, 
   Legend, 
   ResponsiveContainer,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Radar,
 } from 'recharts';
 import { compareAlgorithms } from '../utils/schedulingAlgorithms';
 

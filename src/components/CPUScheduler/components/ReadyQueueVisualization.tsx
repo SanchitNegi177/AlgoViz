@@ -162,10 +162,6 @@ const getReadyQueue = (
   // For Round Robin
   if (algorithm === 'round-robin') {
     // We need to simulate the RR queue based on arrival time and execution order
-    // First find blocks before current time
-    const blocksBeforeNow = ganttData
-      .filter(d => d.end_time <= currentTime)
-      .sort((a, b) => a.end_time - b.end_time);
     
     // Build the RR queue
     const rrQueue: string[] = [];

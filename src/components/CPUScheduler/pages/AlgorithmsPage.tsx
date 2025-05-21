@@ -5,7 +5,7 @@ import AlgorithmCard from '../components/AlgorithmCard.tsx';
 const algorithmData = [
   {
     id: 'fcfs',
-    title: 'First Come First Serve (FCFS)',
+    title: 'FCFS',
     description: 'Processes are executed in the order they arrive in the ready queue. Simple but may not be optimal for different process priorities.',
     preemptive: false,
     strengths: ['Simple to implement', 'Fair for processes that arrive first', 'Low scheduling overhead'],
@@ -13,7 +13,7 @@ const algorithmData = [
   },
   {
     id: 'sjf',
-    title: 'Shortest Job First (SJF)',
+    title: 'SJF',
     description: 'Selects the process with the smallest execution time. Non-preemptive version waits for the current process to complete.',
     preemptive: false,
     strengths: ['Optimal average waiting time', 'Good for batch systems', 'Reduces average turnaround time'],
@@ -21,7 +21,7 @@ const algorithmData = [
   },
   {
     id: 'priority',
-    title: 'Priority Scheduling (Non-preemptive)',
+    title: 'Priority Scheduling',
     description: 'Processes are scheduled according to their priority, with higher priority processes being executed first.',
     preemptive: false,
     strengths: ['Prioritizes important processes', 'Flexible policy implementation', 'Good for real-time systems'],
@@ -37,7 +37,7 @@ const algorithmData = [
   },
   {
     id: 'srtf',
-    title: 'Shortest Remaining Time First (SRTF)',
+    title: 'SRTF',
     description: 'Preemptive version of SJF. Selects the process with the smallest remaining time at every state change.',
     preemptive: true,
     strengths: ['Optimal average waiting time', 'Responsive to short processes', 'Good for interactive systems'],
@@ -45,7 +45,7 @@ const algorithmData = [
   },
   {
     id: 'priority-preemptive',
-    title: 'Priority Scheduling (Preemptive)',
+    title: 'Priority Scheduling',
     description: 'Preemptive version where higher priority processes can interrupt running processes.',
     preemptive: true,
     strengths: ['Better response time for high priority processes', 'Adaptive to changing system needs', 'Suitable for real-time systems'],
