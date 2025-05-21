@@ -1,0 +1,212 @@
+.header, .footer {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.header-left h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.header-right {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.header-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.header-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header-link:active {
+  transform: translateY(0);
+}
+
+/* Add a subtle animation for the header */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 1rem;
+  }
+
+  .header-left h2 {
+    font-size: 1.5rem;
+  }
+
+  .header-right {
+    gap: 1rem;
+  }
+
+  .header-link {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.scheduler-submenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  background-color: rgba(0, 105, 192, 0.1);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Enhanced submenu styling */
+.scheduler-submenu.enhanced {
+  padding: 1.25rem 2rem;
+  background: linear-gradient(90deg, rgba(47, 75, 191, 0.15) 0%, rgba(0, 105, 192, 0.25) 100%);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 105, 192, 0.08);
+  border-bottom: 1px solid rgba(0, 105, 192, 0.1);
+}
+
+.submenu-left {
+  display: flex;
+  align-items: center;
+}
+
+.submenu-right {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.app-title-link {
+  color: #004C8C;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.app-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(0, 105, 192, 0.1);
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.scheduler-submenu.enhanced .app-title-link {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.app-title-link:hover {
+  color: #0069C0;
+}
+
+.header-link {
+  color: #0069C0;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.scheduler-submenu.enhanced .header-link {
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+}
+
+.header-link:hover {
+  background-color: rgba(0, 105, 192, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Add these to keep styling consistent with the existing Header.css if needed */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #0069C0;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header-left h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.header-right {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}

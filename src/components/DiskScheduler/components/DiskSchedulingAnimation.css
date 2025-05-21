@@ -1,0 +1,342 @@
+/* Disk Scheduling Animation Component */
+.disk-scheduling-visualization-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.layout-container {
+  display: grid;
+  grid-template-columns: minmax(300px, 320px) 1fr;
+  gap: 20px;
+}
+
+/* Control Panel */
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.section-box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section-box h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+/* Button styles */
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+.control-btn {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+  color: white;
+  flex: 1;
+  min-width: 70px;
+  text-align: center;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.start-btn {
+  background-color: #4CAF50; /* Green */
+}
+
+.pause-btn {
+  background-color: #FF9800; /* Orange */
+}
+
+.continue-btn {
+  background-color: #2196F3; /* Blue */
+}
+
+.reset-btn {
+  background-color: #F44336; /* Red */
+}
+
+.control-btn:hover {
+  opacity: 0.9;
+}
+
+.control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Progress Slider */
+.slider-container {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.progress-slider {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #e0e0e0;
+  outline: none;
+  border-radius: 3px;
+}
+
+.progress-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #2196F3;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.progress-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #2196F3;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.steps-counter {
+  font-size: 14px;
+  text-align: center;
+  color: #555;
+}
+
+.step-value, .total-steps {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Form Inputs */
+.algorithm-dropdown,
+.queue-generation-dropdown {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #333;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+.track-size-input,
+.starting-track-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Radio options */
+.radio-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.radio-option input[type="radio"] {
+  margin-right: 8px;
+}
+
+.radio-option label {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Visualization section */
+.visualization-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.canvas-container {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  height: 450px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+canvas {
+  width: 100%;
+  height: 400px;
+  margin-top: 5px;
+  border-radius: 4px;
+}
+
+/* Results table */
+.results-table {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.results-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.results-table th, 
+.results-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  word-break: break-word;
+}
+
+.results-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #444;
+  width: 30%;
+}
+
+/* Custom input section */
+.custom-input-section {
+  margin-bottom: 5px;
+}
+
+.input-with-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.input-buttons {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.apply-btn, .random-btn {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.apply-btn {
+  background-color: #2196F3; /* Blue */
+}
+
+.random-btn {
+  background-color: #9C27B0; /* Purple */
+}
+
+.apply-btn:hover, .random-btn:hover {
+  opacity: 0.9;
+}
+
+/* Seek movements calculation display */
+.results-table td {
+  word-break: break-word;
+  max-width: 600px;
+  font-size: 14px;
+}
+
+.calculation-steps {
+  font-family: monospace;
+  white-space: pre-wrap;
+  margin-top: 5px;
+  line-height: 1.5;
+  background-color: #f5f7ff;
+  padding: 8px;
+  border-radius: 4px;
+  border-left: 3px solid #3b5bdb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .layout-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .button-row {
+    flex-wrap: wrap;
+  }
+  
+  .control-btn {
+    flex: 1 0 40%;
+    font-size: 12px;
+    padding: 8px 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .control-btn {
+    flex: 1 0 100%;
+    margin-bottom: 5px;
+  }
+  
+  .input-buttons {
+    flex-direction: column;
+  }
+  
+  .apply-btn, .random-btn {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+} 

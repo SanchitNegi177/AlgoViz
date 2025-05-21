@@ -1,0 +1,36 @@
+/* Styles for the Back to Algorithms button */
+.back-to-algorithms-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 30px auto;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 20px;
+}
+
+.back-to-algorithms-btn {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #3b5bdb;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: 1px solid #dfe3f1;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.back-to-algorithms-btn:hover {
+  background-color: #f0f3ff;
+  border-color: #c8d0f7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(59, 91, 219, 0.1);
+}
+
+@media (max-width: 768px) {
+  .back-to-algorithms-container {
+    justify-content: center;
+  }
+} 
