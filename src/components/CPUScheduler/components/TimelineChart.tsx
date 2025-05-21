@@ -49,7 +49,7 @@ const TimelineChart: React.FC<TimelineChartProps> = ({
     });
     
     setTimelineData(processTimeline);
-  }, [ganttData, currentTime]); // Added timelineData as dependency
+  }, [ganttData, currentTime]); // Removed timelineData dependency
   
   // Find start and end times for visualization
   const startTime = Math.min(...ganttData.map(d => d.start_time));
@@ -59,10 +59,25 @@ const TimelineChart: React.FC<TimelineChartProps> = ({
   const maxWidth = 800;
   
   // Scale factor for converting time to pixels
+  // Ensure we have at least 1 pixel difference to avoid division by zero issues
   const scaleFactor = maxWidth / Math.max(1, endTime - startTime);
+  
+  // For time scale display, ensure we have a minimum span if start and end are too close
+  const effectiveTimeSpan = Math.max(1, endTime - startTime);
   
   // Sort process IDs for consistent display
   const sortedProcessIds = Object.keys(timelineData).sort();
+  
+  // Handle edge case when no processes or empty gantt data
+  if (ganttData.length === 0 || sortedProcessIds.length === 0) {
+    return (
+      <Box sx={{ mt: 4, mb: 2, p: 2, textAlign: 'center' }}>
+        <Typography variant="body2" color="text.secondary">
+          No process data available to display timeline.
+        </Typography>
+      </Box>
+    );
+  }
   
   return (
     <Box sx={{ mt: 4, mb: 2 }}>
@@ -176,23 +191,38 @@ const TimelineChart: React.FC<TimelineChartProps> = ({
           mb: 1,
           borderTop: '1px solid rgba(159, 174, 240, 0.5)',
         }}>
-          {Array.from({ length: endTime - startTime + 1 }).map((_, index) => (
+          {startTime === endTime ? (
+            // Special case for when startTime and endTime are the same
             <Box
-              key={index}
               sx={{
                 position: 'absolute',
-                left: `${index * scaleFactor}px`,
+                left: '50%',
                 top: 0,
                 height: '6px',
                 width: '1px',
                 bgcolor: 'rgba(159, 174, 240, 0.8)',
               }}
             />
-          ))}
+          ) : (
+            // Normal case: draw tick marks for each time unit
+            Array.from({ length: effectiveTimeSpan + 1 }).map((_, index) => (
+              <Box
+                key={index}
+                sx={{
+                  position: 'absolute',
+                  left: `${index * scaleFactor}px`,
+                  top: 0,
+                  height: '6px',
+                  width: '1px',
+                  bgcolor: 'rgba(159, 174, 240, 0.8)',
+                }}
+              />
+            ))
+          )}
           
           {/* Time labels - show fewer labels for readability */}
-          {Array.from({ length: Math.min(10, endTime - startTime + 1) }).map((_, index) => {
-            const timeValue = startTime + Math.floor(index * ((endTime - startTime) / Math.min(9, endTime - startTime)));
+          {Array.from({ length: Math.min(10, effectiveTimeSpan + 1) }).map((_, index) => {
+            const timeValue = startTime + Math.floor(index * (effectiveTimeSpan / Math.min(9, effectiveTimeSpan)));
             return (
               <Typography
                 key={index}

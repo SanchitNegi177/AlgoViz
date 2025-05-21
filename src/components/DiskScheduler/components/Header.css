@@ -1,4 +1,4 @@
-.header, .footer {
+.header {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -103,24 +103,18 @@
   }
 }
 
+/* Enhanced scheduler submenu styling - always maintains full size */
 .scheduler-submenu {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 2rem;
-  background-color: rgba(0, 105, 192, 0.1);
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-/* Enhanced submenu styling */
-.scheduler-submenu.enhanced {
   padding: 1.25rem 2rem;
   background: linear-gradient(90deg, rgba(47, 75, 191, 0.15) 0%, rgba(0, 105, 192, 0.25) 100%);
   border-radius: 12px;
   margin-bottom: 1.5rem;
   box-shadow: 0 4px 15px rgba(0, 105, 192, 0.08);
   border-bottom: 1px solid rgba(0, 105, 192, 0.1);
+  width: 100%;
 }
 
 .submenu-left {
@@ -137,8 +131,8 @@
 .app-title-link {
   color: #004C8C;
   text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.4rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   transition: color 0.2s;
@@ -156,32 +150,21 @@
   margin-right: 8px;
 }
 
-.scheduler-submenu.enhanced .app-title-link {
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-
 .app-title-link:hover {
   color: #0069C0;
 }
 
-.header-link {
+.scheduler-submenu .header-link {
   color: #0069C0;
   text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
   border-radius: 4px;
   transition: all 0.2s;
   background: none;
   border: none;
-  font-size: 1rem;
   cursor: pointer;
-}
-
-.scheduler-submenu.enhanced .header-link {
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0.6rem 1rem;
 }
 
 .header-link:hover {
@@ -189,24 +172,31 @@
   transform: translateY(-2px);
 }
 
-/* Add these to keep styling consistent with the existing Header.css if needed */
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: #0069C0;
-  color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+/* Ensure consistent header styling across all pages */
+@media (max-width: 768px) {
+  .scheduler-submenu {
+    padding: 1rem 1.5rem;
+  }
+  
+  .app-title-link {
+    font-size: 1.2rem;
+  }
+  
+  .scheduler-submenu .header-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
 }
 
-.header-left h2 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-.header-right {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
+@media (max-width: 480px) {
+  .scheduler-submenu {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .submenu-right {
+    width: 100%;
+    justify-content: center;
+  }
 }

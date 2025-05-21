@@ -4,7 +4,23 @@
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   flex-direction: column;
-  position: relative;
+  width: 100%;
+}
+
+/* Make the Header component take full width */
+.simulate-page > .scheduler-submenu {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+/* Style for the main content area */
+.main-content {
+  padding: 20px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .simulation-container {
@@ -15,7 +31,6 @@
 }
 
 .sim-page-bg {
-  min-height: 100vh;
   background: #e9edfb;
   padding: 10px 0 60px 0;
   display: flex;

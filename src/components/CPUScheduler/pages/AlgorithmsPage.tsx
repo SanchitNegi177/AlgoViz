@@ -2,7 +2,19 @@ import React from 'react';
 import { Box, Typography, Grid, Container } from '@mui/material';
 import AlgorithmCard from '../components/AlgorithmCard.tsx';
 
-const algorithmData = [
+interface AlgorithmData {
+  id: string;
+  title: string;
+  description: string;
+  preemptive: boolean;
+  strengths: string[];
+  weaknesses: string[];
+  parameters?: {
+    [key: string]: string;
+  };
+}
+
+const algorithmData: AlgorithmData[] = [
   {
     id: 'fcfs',
     title: 'FCFS',
@@ -73,9 +85,9 @@ const AlgorithmsPage = () => {
                 title={algorithm.title}
                 description={algorithm.description}
                 preemptive={algorithm.preemptive}
-                parameters={algorithm.parameters}
                 strengths={algorithm.strengths}
                 weaknesses={algorithm.weaknesses}
+                {...(algorithm.parameters && { parameters: algorithm.parameters })}
               />
             </Grid>
           ))}

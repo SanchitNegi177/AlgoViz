@@ -10,7 +10,7 @@ const Header = () => {
   };
 
   return (
-    <div className="scheduler-submenu enhanced">
+    <div className="scheduler-submenu">
       <div className="submenu-left">
         <Link to="/" className="app-title-link">
           <span className="app-icon">🖥️</span>

@@ -46,9 +46,21 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
     process_id: '',
     burst_time: 0,
     arrival_time: 0,
-    priority: 0,
+    ...(selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive' ? { priority: 0 } : {})
   });
   const [error, setError] = useState<string>('');
+
+  // Update newProcess when algorithm changes
+  React.useEffect(() => {
+    setNewProcess(prevProcess => {
+      if (selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive') {
+        return { ...prevProcess, priority: prevProcess.priority || 0 };
+      } else {
+        const { priority, ...rest } = prevProcess as any;
+        return rest;
+      }
+    });
+  }, [selectedAlgorithm]);
 
   const handleAlgorithmChange = (event: SelectChangeEvent) => {
     setSelectedAlgorithm(event.target.value);
@@ -72,15 +84,24 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
       return;
     }
     
-    // Add the new process
-    setProcesses([...processes, { ...newProcess }]);
+    // Add the new process - only include priority for priority algorithm
+    let processToAdd: Process;
+    if (selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive') {
+      processToAdd = { ...newProcess, priority: newProcess.priority || 0 };
+    } else {
+      // For non-priority algorithms, don't include the priority field
+      const { priority, ...rest } = newProcess as any;
+      processToAdd = rest;
+    }
+    
+    setProcesses([...processes, processToAdd]);
     
     // Reset form
     setNewProcess({
       process_id: '',
       burst_time: 0,
       arrival_time: 0,
-      priority: 0,
+      ...(selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive' ? { priority: 0 } : {})
     });
     setError('');
   };
@@ -122,14 +143,21 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
   const handleGenerateRandomProcesses = () => {
     const randomProcesses: Process[] = [];
     const count = Math.floor(Math.random() * 5) + 3; // Generate 3-7 processes
+    const isPriorityAlgorithm = selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive';
     
     for (let i = 0; i < count; i++) {
-      randomProcesses.push({
+      const process: Process = {
         process_id: `P${i+1}`,
         burst_time: Math.floor(Math.random() * 10) + 1, // 1-10
         arrival_time: Math.floor(Math.random() * 5), // 0-4
-        priority: Math.floor(Math.random() * 5) + 1, // 1-5
-      });
+      };
+      
+      // Only add priority field for priority algorithm
+      if (isPriorityAlgorithm) {
+        process.priority = Math.floor(Math.random() * 5) + 1; // 1-5
+      }
+      
+      randomProcesses.push(process);
     }
     
     setProcesses(randomProcesses);
@@ -157,6 +185,7 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
                 <MenuItem value="sjf">Shortest Job First (SJF)</MenuItem>
                 <MenuItem value="srtf">Shortest Remaining Time First (SRTF)</MenuItem>
                 <MenuItem value="priority">Priority Scheduling</MenuItem>
+                <MenuItem value="priority-preemptive">Priority Scheduling (Preemptive)</MenuItem>
                 <MenuItem value="round-robin">Round Robin</MenuItem>
               </Select>
             </FormControl>
@@ -192,7 +221,7 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
         </Typography>
         
         <Grid container spacing={2} alignItems="flex-end">
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={(selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive') ? 2 : 3}>
             <TextField
               fullWidth
               label="Process ID"
@@ -201,7 +230,7 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12} sm={2}>
+          <Grid item xs={12} sm={(selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive') ? 2 : 3}>
             <TextField
               fullWidth
               label="Burst Time"
@@ -212,7 +241,7 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
               InputProps={{ inputProps: { min: 1 } }}
             />
           </Grid>
-          <Grid item xs={12} sm={2}>
+          <Grid item xs={12} sm={(selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive') ? 2 : 3}>
             <TextField
               fullWidth
               label="Arrival Time"
@@ -223,17 +252,20 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
               InputProps={{ inputProps: { min: 0 } }}
             />
           </Grid>
-          <Grid item xs={12} sm={2}>
-            <TextField
-              fullWidth
-              label="Priority"
-              name="priority"
-              type="number"
-              value={newProcess.priority}
-              onChange={handleChange}
-              InputProps={{ inputProps: { min: 1 } }}
-            />
-          </Grid>
+          {(selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive') && (
+            <Grid item xs={12} sm={2}>
+              <TextField
+                fullWidth
+                label="Priority"
+                name="priority"
+                type="number"
+                value={newProcess.priority || 0}
+                onChange={handleChange}
+                InputProps={{ inputProps: { min: 1 } }}
+                helperText="Lower = Higher priority"
+              />
+            </Grid>
+          )}
           <Grid item xs={12} sm={3}>
             <Button
               variant="contained"
@@ -261,7 +293,7 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
                   <TableCell>Process ID</TableCell>
                   <TableCell>Burst Time</TableCell>
                   <TableCell>Arrival Time</TableCell>
-                  <TableCell>Priority</TableCell>
+                  {(selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive') && <TableCell>Priority</TableCell>}
                   <TableCell align="center">Actions</TableCell>
                 </TableRow>
               </TableHead>
@@ -271,7 +303,7 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
                     <TableCell>{process.process_id}</TableCell>
                     <TableCell>{process.burst_time}</TableCell>
                     <TableCell>{process.arrival_time}</TableCell>
-                    <TableCell>{process.priority}</TableCell>
+                    {(selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive') && <TableCell>{process.priority}</TableCell>}
                     <TableCell align="center">
                       <IconButton
                         edge="end"

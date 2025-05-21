@@ -71,7 +71,7 @@ const Simulate = () => {
   return (
     <div className="simulate-page">
       <Header />
-      <div className="simulation-container">
+      <div className="main-content">
         <div className="back-button-container">
           <button className="back-button" onClick={handleBack}>
             <span>←</span> Back to Algorithms

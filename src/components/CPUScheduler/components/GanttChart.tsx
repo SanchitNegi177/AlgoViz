@@ -75,18 +75,24 @@ const GanttChart: React.FC<GanttChartProps> = ({ data, title, autoPlay = true, a
   const isPreemptive = algorithm === 'srtf' || algorithm === 'priority-preemptive' || algorithm === 'round-robin';
   
   // Create time markers
-  const timeMarkers = [];
+  const timeMarkers: number[] = [];
   // Limit the number of markers to avoid overcrowding
   const markerCount = Math.min(Math.max(5, endTime - startTime), 20);
-  const markerStep = Math.ceil((endTime - startTime) / (markerCount - 1));
+  // Ensure markerStep is at least 1 to prevent infinite loops
+  const markerStep = Math.max(1, Math.ceil((endTime - startTime) / (markerCount - 1)));
   
-  for (let i = startTime; i <= endTime; i += markerStep) {
-    timeMarkers.push(i);
-  }
-  
-  // Make sure the last marker is included
-  if (timeMarkers[timeMarkers.length - 1] !== endTime) {
-    timeMarkers.push(endTime);
+  // Handle case where startTime and endTime are the same
+  if (startTime === endTime) {
+    timeMarkers.push(startTime);
+  } else {
+    for (let i = startTime; i <= endTime; i += markerStep) {
+      timeMarkers.push(i);
+    }
+    
+    // Make sure the last marker is included
+    if (timeMarkers[timeMarkers.length - 1] !== endTime) {
+      timeMarkers.push(endTime);
+    }
   }
   
   // Function definitions with useCallback

@@ -85,15 +85,36 @@ const SimpleProcessForm: React.FC<SimpleProcessFormProps> = ({
     process_id: '',
     burst_time: 0,
     arrival_time: 0,
-    priority: 0,
+    ...(selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive' ? { priority: 0 } : {})
   });
 
   // Set the selected algorithm based on URL param if available
   useEffect(() => {
     if (algorithmId && ['fcfs', 'sjf', 'srtf', 'priority', 'priority-preemptive', 'round-robin'].includes(algorithmId)) {
       setSelectedAlgorithm(algorithmId);
+      // Update newProcess state when algorithm changes to include/exclude priority field
+      setNewProcess(prevProcess => {
+        if (algorithmId === 'priority' || algorithmId === 'priority-preemptive') {
+          return { ...prevProcess, priority: prevProcess.priority || 0 };
+        } else {
+          const { priority, ...rest } = prevProcess as any;
+          return rest;
+        }
+      });
     }
   }, [algorithmId]);
+
+  // Update newProcess when algorithm changes
+  useEffect(() => {
+    setNewProcess(prevProcess => {
+      if (selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive') {
+        return { ...prevProcess, priority: prevProcess.priority || 0 };
+      } else {
+        const { priority, ...rest } = prevProcess as any;
+        return rest;
+      }
+    });
+  }, [selectedAlgorithm]);
 
   // Notify parent component when processes change
   useEffect(() => {
@@ -131,8 +152,17 @@ const SimpleProcessForm: React.FC<SimpleProcessFormProps> = ({
       return;
     }
     
-    // Add the new process
-    const updatedProcesses = [...processes, { ...newProcess }];
+    // Add the new process - only include priority for priority algorithms
+    let processToAdd: Process;
+    if (selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive') {
+      processToAdd = { ...newProcess, priority: newProcess.priority || 0 };
+    } else {
+      // For non-priority algorithms, don't include the priority field
+      const { priority, ...rest } = newProcess as any;
+      processToAdd = rest;
+    }
+    
+    const updatedProcesses = [...processes, processToAdd];
     setProcesses(updatedProcesses);
     
     // Reset form
@@ -140,7 +170,7 @@ const SimpleProcessForm: React.FC<SimpleProcessFormProps> = ({
       process_id: '',
       burst_time: 0,
       arrival_time: 0,
-      priority: 0,
+      ...(selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive' ? { priority: 0 } : {})
     });
     setError('');
   };
@@ -192,14 +222,21 @@ const SimpleProcessForm: React.FC<SimpleProcessFormProps> = ({
   const handleGenerateRandomProcesses = () => {
     const randomProcesses: Process[] = [];
     const count = 5; // Generate 5 processes
+    const isPriorityAlgorithm = selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive';
     
     for (let i = 0; i < count; i++) {
-      randomProcesses.push({
+      const process: Process = {
         process_id: `P${i+1}`,
         burst_time: Math.floor(Math.random() * 10) + 1, // 1-10
         arrival_time: Math.floor(Math.random() * 5), // 0-4
-        priority: Math.floor(Math.random() * 5) + 1, // 1-5
-      });
+      };
+      
+      // Only add priority field for priority algorithms
+      if (isPriorityAlgorithm) {
+        process.priority = Math.floor(Math.random() * 5) + 1; // 1-5
+      }
+      
+      randomProcesses.push(process);
     }
     
     setProcesses(randomProcesses);

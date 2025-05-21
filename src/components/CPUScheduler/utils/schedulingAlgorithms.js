@@ -202,8 +202,9 @@ export const srtf = (processes) => {
     })[0];
     
     // Determine the next event time
+    const currentFilterTime = currentTime; // Use a more specific name
     const nextEventTime = processesWithArrival
-      .filter(p => p.arrival_time > currentTime)
+      .filter(p => p.arrival_time > currentFilterTime)
       .sort((a, b) => a.arrival_time - b.arrival_time)[0]?.arrival_time || Infinity;
     
     // Determine how long this process will run
@@ -280,14 +281,16 @@ export const priorityScheduling = (processes, isPreemptive = false) => {
     
     while (completedProcesses.size < processes.length) {
       // Find available processes that have arrived but not completed
+      const time = currentTime; // Store current time in a variable to avoid closure issue
       const availableProcesses = processesWithArrival.filter(p => 
-        p.arrival_time <= currentTime && !completedProcesses.has(p.process_id)
+        p.arrival_time <= time && !completedProcesses.has(p.process_id)
       );
       
       if (availableProcesses.length === 0) {
         // No processes available, jump to next arrival time
+        const time = currentTime; // Store current time in a variable to avoid closure issue
         const nextArrival = processesWithArrival
-          .filter(p => p.arrival_time > currentTime)
+          .filter(p => p.arrival_time > time)
           .sort((a, b) => a.arrival_time - b.arrival_time)[0];
         
         if (nextArrival) {
@@ -398,8 +401,9 @@ export const priorityScheduling = (processes, isPreemptive = false) => {
       })[0];
       
       // Determine the next event time
+      const currentFilterTime = currentTime; // Use a more specific name
       const nextEventTime = processesWithArrival
-        .filter(p => p.arrival_time > currentTime)
+        .filter(p => p.arrival_time > currentFilterTime)
         .sort((a, b) => a.arrival_time - b.arrival_time)[0]?.arrival_time || Infinity;
       
       // Determine how long this process will run
@@ -479,8 +483,9 @@ export const roundRobin = (processes, timeQuantum = 2) => {
   let completedProcesses = 0;
   
   // Initially, add all processes that arrive at time 0 to the queue
+  const initialTime = currentTime; // Store initial time in a variable
   processesWithInfo.forEach(p => {
-    if (p.arrival_time === 0) {
+    if (p.arrival_time === initialTime) {
       queue.push(p);
     }
   });
@@ -490,16 +495,18 @@ export const roundRobin = (processes, timeQuantum = 2) => {
     if (queue.length === 0) {
       // Queue is empty but there are still processes to be executed
       // Find the next process to arrive
+      const time = currentTime; // Store current time in a variable to avoid closure issue
       const nextArrival = processesWithInfo
-        .filter(p => p.arrival_time > currentTime && p.remaining_time > 0)
+        .filter(p => p.arrival_time > time && p.remaining_time > 0)
         .sort((a, b) => a.arrival_time - b.arrival_time)[0];
       
       if (nextArrival) {
         currentTime = nextArrival.arrival_time;
         
         // Add all processes that arrive at this time to the queue
+        const arrivalTime = currentTime; // Store in a variable to avoid closure issue
         processesWithInfo.forEach(p => {
-          if (p.arrival_time <= currentTime && p.remaining_time > 0 && !queue.includes(p)) {
+          if (p.arrival_time <= arrivalTime && p.remaining_time > 0 && !queue.includes(p)) {
             queue.push(p);
           }
         });
@@ -533,8 +540,10 @@ export const roundRobin = (processes, timeQuantum = 2) => {
     currentTime += executeTime;
     
     // Check for new arrivals during this time quantum
+    const execStartTime = currentTime - executeTime;
+    const execEndTime = currentTime;
     processesWithInfo.forEach(p => {
-      if (p.arrival_time > currentTime - executeTime && p.arrival_time <= currentTime && 
+      if (p.arrival_time > execStartTime && p.arrival_time <= execEndTime && 
           p.remaining_time > 0 && !queue.includes(p) && p !== currentProcess) {
         queue.push(p);
       }

@@ -2,6 +2,12 @@ import React from 'react';
 import { Box, Typography, useTheme, Tooltip } from '@mui/material';
 import { GanttData } from '../services/SimpleApi';
 
+// Extended GanttData interface with optional properties
+interface ExtendedGanttData extends GanttData {
+  arrival_time?: number;
+  priority?: number;
+}
+
 interface ReadyQueueVisualizationProps {
   ganttData: GanttData[];
   processColors: Record<string, string>;
@@ -21,8 +27,8 @@ const getReadyQueue = (
     process_id: d.process_id,
     start_time: d.start_time,
     end_time: d.end_time,
-    arrival_time: d.arrival_time || 0,
-    priority: d.priority
+    arrival_time: (d as ExtendedGanttData).arrival_time || 0,
+    priority: (d as ExtendedGanttData).priority !== undefined ? (d as ExtendedGanttData).priority : 0
   }));
   
   // Find unique processes
