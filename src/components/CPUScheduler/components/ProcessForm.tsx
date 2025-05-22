@@ -22,6 +22,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { Process } from '../services/api';
+import { useLocation } from 'react-router-dom';
 
 interface ProcessFormProps {
   processes: Process[];
@@ -49,6 +50,12 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
     ...(selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive' ? { priority: 0 } : {})
   });
   const [error, setError] = useState<string>('');
+  const location = useLocation();
+  
+  // Check if we're on the algorithm detail page or compare page
+  const isAlgorithmDetailPage = location.pathname.includes('/algorithm/');
+  const isComparePage = location.pathname.includes('/compare');
+  const showAlgorithmSelector = !isAlgorithmDetailPage || isComparePage;
 
   // Update newProcess when algorithm changes
   React.useEffect(() => {
@@ -171,28 +178,30 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
       
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <Grid container spacing={2} alignItems="center" sx={{ mb: 2 }}>
-          <Grid item xs={12} sm={4}>
-            <FormControl fullWidth>
-              <InputLabel id="algorithm-select-label">Algorithm</InputLabel>
-              <Select
-                labelId="algorithm-select-label"
-                id="algorithm-select"
-                value={selectedAlgorithm}
-                label="Algorithm"
-                onChange={handleAlgorithmChange}
-              >
-                <MenuItem value="fcfs">First Come First Serve (FCFS)</MenuItem>
-                <MenuItem value="sjf">Shortest Job First (SJF)</MenuItem>
-                <MenuItem value="srtf">Shortest Remaining Time First (SRTF)</MenuItem>
-                <MenuItem value="priority">Priority Scheduling</MenuItem>
-                <MenuItem value="priority-preemptive">Priority Scheduling (Preemptive)</MenuItem>
-                <MenuItem value="round-robin">Round Robin</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
+          {showAlgorithmSelector && (
+            <Grid item xs={12} sm={4}>
+              <FormControl fullWidth>
+                <InputLabel id="algorithm-select-label">Algorithm</InputLabel>
+                <Select
+                  labelId="algorithm-select-label"
+                  id="algorithm-select"
+                  value={selectedAlgorithm}
+                  label="Algorithm"
+                  onChange={handleAlgorithmChange}
+                >
+                  <MenuItem value="fcfs">First Come First Serve (FCFS)</MenuItem>
+                  <MenuItem value="sjf">Shortest Job First (SJF)</MenuItem>
+                  <MenuItem value="srtf">Shortest Remaining Time First (SRTF)</MenuItem>
+                  <MenuItem value="priority">Priority Scheduling</MenuItem>
+                  <MenuItem value="priority-preemptive">Priority Scheduling (Preemptive)</MenuItem>
+                  <MenuItem value="round-robin">Round Robin</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+          )}
           
           {selectedAlgorithm === 'round-robin' && (
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={showAlgorithmSelector ? 4 : 6}>
               <TextField
                 fullWidth
                 label="Time Quantum"
@@ -204,7 +213,7 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
             </Grid>
           )}
           
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={showAlgorithmSelector ? 4 : 6}>
             <Button 
               variant="outlined" 
               color="primary" 
