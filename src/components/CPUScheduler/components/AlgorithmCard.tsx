@@ -56,18 +56,29 @@ const AlgorithmCard: React.FC<AlgorithmCardProps> = ({
         <Box sx={{ mb: 2 }}>
           <Box sx={{ 
             display: 'flex', 
+            justifyContent: 'space-between',
             alignItems: 'center', 
             mb: 1, 
             gap: 1,
-            flexWrap: 'wrap'
           }}>
-            <Typography variant="h6" component="div" color="text.primary" sx={{ mr: 1 }}>
+            <Typography variant="h6" component="div" sx={{ color: '#25316d', fontWeight: 700 }}>
               {title}
             </Typography>
             <Chip
               label={preemptive ? 'Preemptive' : 'Non-preemptive'}
-              color={preemptive ? 'primary' : 'default'}
               size="small"
+              sx={{
+                backgroundColor: preemptive ? '#8B5CF6' : '#3B82F6',
+                color: 'white',
+                fontWeight: 600,
+                fontSize: '0.75rem',
+                height: '24px',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
+                '& .MuiChip-label': {
+                  px: 1.5,
+                },
+              }}
             />
           </Box>
           
@@ -99,26 +110,26 @@ const AlgorithmCard: React.FC<AlgorithmCardProps> = ({
         <Divider sx={{ width: '100%', mb: 2 }} />
         
         <Box sx={{ mt: 'auto' }}>
-          <Typography variant="subtitle2" color="primary" gutterBottom>
+          <Typography variant="subtitle2" sx={{ color: '#2d7a2d', fontWeight: 700 }} gutterBottom>
             Strengths:
           </Typography>
           {strengths && (
             <Box component="ul" sx={{ mt: 0.5, pl: 2.5, mb: 1.5 }}>
               {strengths.map((strength, i) => (
-                <Typography key={i} component="li" variant="body2" sx={{ textAlign: 'left' }}>
+                <Typography key={i} component="li" variant="body2" sx={{ textAlign: 'left', color: '#2d7a2d' }}>
                   {strength}
                 </Typography>
               ))}
             </Box>
           )}
           
-          <Typography variant="subtitle2" color="error" gutterBottom>
+          <Typography variant="subtitle2" sx={{ color: '#d13a3a', fontWeight: 700 }} gutterBottom>
             Weaknesses:
           </Typography>
           {weaknesses && (
             <Box component="ul" sx={{ mt: 0.5, pl: 2.5, mb: 0 }}>
               {weaknesses.map((weakness, i) => (
-                <Typography key={i} component="li" variant="body2" sx={{ textAlign: 'left' }}>
+                <Typography key={i} component="li" variant="body2" sx={{ textAlign: 'left', color: '#d13a3a' }}>
                   {weakness}
                 </Typography>
               ))}

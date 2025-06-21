@@ -95,42 +95,43 @@ const algorithms = [
 const DiskAlgorithms = () => {
   const navigate = useNavigate();
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #A5B4FC 0%, #818CF8 20%, #6366F1 40%, #8B5CF6 60%, #A855F7 80%, #C084FC 100%)' }}>
       <Header />
-      <div className="home-bg">
-        <div className="algorithm-section">
-          <h2 className="algorithms-title">Disk Scheduling Algorithms</h2>
-          <div className="algorithm-grid">
-            {algorithms.map((algo, index) => (
-              <div
-                className="algorithm-card clickable-algo-card"
-                key={index}
-                onClick={() => navigate(`/disk-scheduler/simulate/${algo.path}`)}
-                tabIndex={0}
-                role="button"
-                onKeyPress={e => { if (e.key === 'Enter') navigate(`/disk-scheduler/simulate/${algo.path}`); }}
-              >
-                <h3 className="algo-title">{algo.title}</h3>
-                <p className="algo-desc">{algo.description}</p>
-                <hr />
-                <div className="algo-strengths">
-                  <span className="strength-title">Strengths:</span>
-                  <ul>
-                    {algo.strengths.map((s, i) => <li key={i}>{s}</li>)}
-                  </ul>
-                </div>
-                <div className="algo-weaknesses">
-                  <span className="weakness-title">Weaknesses:</span>
-                  <ul>
-                    {algo.weaknesses.map((w, i) => <li key={i}>{w}</li>)}
-                  </ul>
-                </div>
+      <div className="algos-bg">
+        <div className="algos-header">
+          <h1>Disk Scheduling Algorithms</h1>
+          <p>Choose an algorithm to visualize how it schedules disk requests and optimizes seek time.</p>
+        </div>
+        <div className="algos-grid">
+          {algorithms.map((algo, index) => (
+            <div
+              className="algo-card clickable-algo-card"
+              key={index}
+              onClick={() => navigate(`/disk-scheduler/simulate/${algo.path}`)}
+              tabIndex={0}
+              role="button"
+              onKeyPress={e => { if (e.key === 'Enter') navigate(`/disk-scheduler/simulate/${algo.path}`); }}
+            >
+              <h2>{algo.title}</h2>
+              <p className="algo-desc">{algo.description}</p>
+              <hr />
+              <div className="algo-strengths">
+                <span className="strength-title">Strengths:</span>
+                <ul>
+                  {algo.strengths.map((s, i) => <li key={i}>{s}</li>)}
+                </ul>
               </div>
-            ))}
-          </div>
+              <div className="algo-weaknesses">
+                <span className="weakness-title">Weaknesses:</span>
+                <ul>
+                  {algo.weaknesses.map((w, i) => <li key={i}>{w}</li>)}
+                </ul>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

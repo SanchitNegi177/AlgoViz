@@ -273,7 +273,8 @@ const HomePage = () => {
                   boxShadow: '0 12px 30px rgba(45, 74, 143, 0.4)',
                   borderRadius: '12px',
                   '&:hover': {
-                    boxShadow: '0 18px 40px rgba(45, 74, 143, 0.5)',
+                    background: 'linear-gradient(135deg, #60A5FA 0%, #34D399 50%, #FBBF24 100%)',
+                    boxShadow: '0 18px 40px rgba(96, 165, 250, 0.5)',
                     transform: 'translateY(-2px)',
                   },
                 }}
@@ -363,7 +364,8 @@ const HomePage = () => {
                   boxShadow: '0 12px 30px rgba(107, 70, 193, 0.4)',
                   borderRadius: '12px',
                   '&:hover': {
-                    boxShadow: '0 18px 40px rgba(107, 70, 193, 0.5)',
+                    background: 'linear-gradient(135deg, #F472B6 0%, #A78BFA 50%, #60A5FA 100%)',
+                    boxShadow: '0 18px 40px rgba(244, 114, 182, 0.5)',
                     transform: 'translateY(-2px)',
                   },
                 }}
@@ -469,7 +471,7 @@ const Footer = () => {
     <Box 
       component="footer" 
       sx={{ 
-        py: 2,
+        py: 1,
         mt: 'auto',
         textAlign: 'center',
         background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.95) 0%, rgba(227, 234, 243, 0.92) 100%)',
@@ -497,14 +499,7 @@ const Footer = () => {
           fontWeight: 500,
           color: '#1A2332',
         }}>
-          © {new Date().getFullYear()} OS Scheduling Visualizers - Created for educational purposes
-        </Typography>
-        <Typography variant="body2" sx={{ 
-          fontSize: '0.7rem', 
-          color: '#3D4852',
-          mt: 0.5,
-        }}>
-          Built with React & Material-UI
+          © {new Date().getFullYear()} Created for educational purposes
         </Typography>
       </Container>
     </Box>

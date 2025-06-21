@@ -6,7 +6,6 @@ import {
   Button,
   Typography,
   Grid,
-  IconButton,
   Table,
   TableBody,
   TableCell,
@@ -19,7 +18,6 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { Process } from '../services/api';
 import { useLocation } from 'react-router-dom';
@@ -314,13 +312,20 @@ const ProcessForm: React.FC<ProcessFormProps> = ({
                     <TableCell>{process.arrival_time}</TableCell>
                     {(selectedAlgorithm === 'priority' || selectedAlgorithm === 'priority-preemptive') && <TableCell>{process.priority}</TableCell>}
                     <TableCell align="center">
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
+                      <Button
+                        variant="outlined"
+                        color="error"
+                        size="small"
                         onClick={() => handleDeleteProcess(index)}
+                        sx={{ 
+                          fontSize: '0.8rem',
+                          px: 2,
+                          py: 0.5,
+                          minWidth: 'auto'
+                        }}
                       >
-                        <DeleteIcon />
-                      </IconButton>
+                        Remove
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

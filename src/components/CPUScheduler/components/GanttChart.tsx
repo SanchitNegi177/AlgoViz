@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Box, Paper, Typography, useTheme, Tooltip } from '@mui/material';
 import { GanttData } from '../services/SimpleApi.ts';
 import ReadyQueueVisualization from './ReadyQueueVisualization.tsx';
-import TimelineChart from './TimelineChart.tsx';
+
 
 interface GanttChartProps {
   data: GanttData[];
@@ -71,8 +71,7 @@ const GanttChart: React.FC<GanttChartProps> = ({ data, title, autoPlay = true, a
     processColors[id] = colors[index % colors.length];
   });
   
-  // Check if the algorithm is preemptive
-  const isPreemptive = algorithm === 'srtf' || algorithm === 'priority-preemptive' || algorithm === 'round-robin';
+
   
   // Create time markers
   const timeMarkers: number[] = [];
@@ -113,6 +112,15 @@ const GanttChart: React.FC<GanttChartProps> = ({ data, title, autoPlay = true, a
     setIsAnimating(false);
     setCurrentTime(startTime);
   }, [startTime]);
+  
+  // Manual timeline control functions
+  const handleStepBackward = useCallback(() => {
+    setCurrentTime(prev => Math.max(startTime, prev - 1));
+  }, [startTime]);
+  
+  const handleStepForward = useCallback(() => {
+    setCurrentTime(prev => Math.min(endTime, prev + 1));
+  }, [endTime]);
   
   // Auto-start animation on first render if autoPlay is true
   useEffect(() => {
@@ -222,6 +230,54 @@ const GanttChart: React.FC<GanttChartProps> = ({ data, title, autoPlay = true, a
           >
             {isPaused ? 'Resume' : 'Pause'}
           </button>
+        )}
+        
+        {/* Manual timeline controls - only show when paused */}
+        {isAnimating && isPaused && (
+          <>
+            <button 
+              onClick={handleStepBackward}
+              disabled={currentTime <= startTime}
+              style={{ 
+                padding: '8px 12px', 
+                background: currentTime <= startTime ? '#E5E7EB' : 'linear-gradient(135deg, #42DDFF 0%, #60A5FA 100%)', 
+                color: currentTime <= startTime ? '#9CA3AF' : 'white',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: currentTime <= startTime ? 'not-allowed' : 'pointer',
+                fontWeight: 600,
+                boxShadow: currentTime <= startTime ? 'none' : '0 4px 12px rgba(66, 221, 255, 0.25)',
+                fontSize: '16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+              }}
+              title="Step backward (1 sec)"
+            >
+              ◀ -1s
+            </button>
+            <button 
+              onClick={handleStepForward}
+              disabled={currentTime >= endTime}
+              style={{ 
+                padding: '8px 12px', 
+                background: currentTime >= endTime ? '#E5E7EB' : 'linear-gradient(135deg, #42DDFF 0%, #60A5FA 100%)', 
+                color: currentTime >= endTime ? '#9CA3AF' : 'white',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: currentTime >= endTime ? 'not-allowed' : 'pointer',
+                fontWeight: 600,
+                boxShadow: currentTime >= endTime ? 'none' : '0 4px 12px rgba(66, 221, 255, 0.25)',
+                fontSize: '16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+              }}
+              title="Step forward (1 sec)"
+            >
+              +1s ▶
+            </button>
+          </>
         )}
         <button 
           onClick={handleResetAnimation}
@@ -601,15 +657,7 @@ const GanttChart: React.FC<GanttChartProps> = ({ data, title, autoPlay = true, a
           })}
         </Box>
         
-        {/* For preemptive algorithms, add timeline chart */}
-        {isPreemptive && (
-          <TimelineChart
-            ganttData={data}
-            currentTime={currentTime}
-            processColors={processColors}
-            title="Process Timeline"
-          />
-        )}
+
       </Box>
     </Paper>
   );

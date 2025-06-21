@@ -428,14 +428,16 @@ const DiskSchedulingAnimation = ({
     setIsPaused(false);
   };
 
-  const pauseAnimation = () => {
-    setIsPlaying(false);
-    setIsPaused(true);
-  };
-
-  const continueAnimation = () => {
-    setIsPlaying(true);
-    setIsPaused(false);
+  const togglePauseResume = () => {
+    if (isPlaying) {
+      // Currently playing, so pause it
+      setIsPlaying(false);
+      setIsPaused(true);
+    } else if (isPaused) {
+      // Currently paused, so resume it
+      setIsPlaying(true);
+      setIsPaused(false);
+    }
   };
 
   const resetAnimation = () => {
@@ -515,27 +517,11 @@ const DiskSchedulingAnimation = ({
       Math.floor(Math.random() * size)
     );
     
-    setCurrentRequests(randomPositions);
+    // Only fill the input field with random values
     setCustomInput(randomPositions.join(', '));
     
-    // Calculate the sequence for the selected algorithm
-    const algorithmSequence = calculateSeekSequence(
-      selectedAlgorithm,
-      randomPositions,
-      startingTrackValue,
-      trackSizeValue,
-      directionValue
-    );
-    
-    // Update total steps based on the algorithm sequence
-    setTotalSteps(algorithmSequence.length);
-    
-    // Reset animation state
-    setCurrentStep(0);
-    setSteps(0);
-    setIsPlaying(false);
-    setIsPaused(false);
-    drawDiskSchedulingGraph();
+    // Note: Algorithm execution should only happen when Apply button is clicked
+    // Do not update currentRequests, calculate sequences, or redraw graph here
   };
 
   useEffect(() => {
@@ -771,12 +757,17 @@ const DiskSchedulingAnimation = ({
         setStartingTrackInput((newTrackSize - 1).toString());
       }
       
-      // Generate new positions if needed when track size changes
+      // Clear invalid requests when track size changes
       if (needNewRequests) {
-        generateRandomInput(newTrackSize);
-      } else {
-        drawDiskSchedulingGraph();
+        setCurrentRequests([]);
+        setCustomInput('');
+        setTotalSteps(0);
+        setCurrentStep(0);
+        setSteps(0);
+        setIsPlaying(false);
+        setIsPaused(false);
       }
+      drawDiskSchedulingGraph();
     }
   };
 
@@ -977,14 +968,15 @@ const DiskSchedulingAnimation = ({
           <div className="section-box animation-controls">
             <h3>Animation Controls</h3>
             <div className="button-row">
-              <button className="control-btn start-btn" onClick={startAnimation} disabled={isPlaying}>
+              <button className="control-btn start-btn" onClick={startAnimation} disabled={isPlaying || isPaused}>
                 Start
               </button>
-              <button className="control-btn pause-btn" onClick={pauseAnimation} disabled={!isPlaying}>
-                Pause
-              </button>
-              <button className="control-btn continue-btn" onClick={continueAnimation} disabled={!isPaused}>
-                Continue
+              <button 
+                className={`control-btn ${isPlaying ? 'pause-btn' : 'resume-btn'}`} 
+                onClick={togglePauseResume} 
+                disabled={!isPlaying && !isPaused}
+              >
+                {isPlaying ? 'Pause' : 'Resume'}
               </button>
               <button className="control-btn reset-btn" onClick={resetAnimation}>
                 Reset

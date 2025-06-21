@@ -75,7 +75,7 @@
   background-color: #FF9800; /* Orange */
 }
 
-.continue-btn {
+.resume-btn {
   background-color: #2196F3; /* Blue */
 }
 
@@ -319,7 +319,7 @@ canvas {
   }
   
   .control-btn {
-    flex: 1 0 40%;
+    flex: 1 0 30%;
     font-size: 12px;
     padding: 8px 5px;
   }
