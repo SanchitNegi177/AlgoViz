@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #E8ECF4;
+  background: #E3EAF3;
   color: #1A2332;
 }
 
@@ -32,11 +32,11 @@ code {
 
 @keyframes pulse {
   0%, 100% {
-    opacity: 0.15;
+    opacity: 0.2;
     transform: scale(1);
   }
   50% {
-    opacity: 0.35;
+    opacity: 0.4;
     transform: scale(1.1);
   }
 }
@@ -52,24 +52,24 @@ code {
   }
 }
 
-/* Scrollbar styling for balanced theme */
+/* Scrollbar styling for blue theme */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #E8ECF4;
+  background: #E3EAF3;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #A8B5C8, #95A4BA);
+  background: linear-gradient(135deg, #8AA8CC, #6B93C0);
   border-radius: 5px;
-  border: 2px solid #E8ECF4;
+  border: 2px solid #E3EAF3;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #95A4BA, #8294AB);
+  background: linear-gradient(135deg, #6B93C0, #4D7EB4);
 }
 
 /* Home Page Styles */
@@ -77,7 +77,7 @@ code {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #D4DDE8 0%, #BCC8D6 30%, #A8B5C8 70%, #95A4BA 100%);
+  background: linear-gradient(135deg, #C8D5E8 0%, #A8BDD8 25%, #8AA8CC 50%, #6B93C0 75%, #4D7EB4 100%);
 }
 
 .home-header {
@@ -86,8 +86,8 @@ code {
   padding: 1.5rem 0;
   text-align: center;
   backdrop-filter: blur(25px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 20px rgba(46, 74, 107, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(46, 74, 107, 0.18);
 }
 
 .schedulers-container {
@@ -104,16 +104,16 @@ code {
   width: 100%;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(46, 74, 107, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: 0 20px 40px rgba(46, 74, 107, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: linear-gradient(135deg, rgba(245, 247, 250, 0.9) 0%, rgba(232, 236, 244, 0.85) 100%);
+  background: linear-gradient(135deg, rgba(240, 245, 251, 0.92) 0%, rgba(227, 234, 243, 0.88) 100%);
   backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .scheduler-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 30px 60px rgba(46, 74, 107, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: 0 30px 60px rgba(46, 74, 107, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .card-header {
@@ -132,7 +132,7 @@ code {
 
 .card-content {
   padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(245, 247, 250, 0.9) 0%, rgba(232, 236, 244, 0.85) 100%);
+  background: linear-gradient(135deg, rgba(240, 245, 251, 0.92) 0%, rgba(227, 234, 243, 0.88) 100%);
   backdrop-filter: blur(25px);
   color: #3D4852;
 }

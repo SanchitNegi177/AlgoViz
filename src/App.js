@@ -22,8 +22,8 @@ const theme = createTheme({
       dark: '#2A3D6B',
     },
     background: {
-      default: '#E8ECF4',
-      paper: '#F5F7FA',
+      default: '#E3EAF3',
+      paper: '#F0F5FB',
     },
     text: {
       primary: '#1A2332',
@@ -61,7 +61,7 @@ const HomePage = () => {
   return (
     <Box sx={{ 
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #D4DDE8 0%, #BCC8D6 30%, #A8B5C8 70%, #95A4BA 100%)',
+      background: 'linear-gradient(135deg, #C8D5E8 0%, #A8BDD8 25%, #8AA8CC 50%, #6B93C0 75%, #4D7EB4 100%)',
       position: 'relative',
       overflow: 'hidden',
       '&::before': {
@@ -72,10 +72,10 @@ const HomePage = () => {
         right: 0,
         bottom: 0,
         background: `
-          radial-gradient(circle at 15% 40%, rgba(46, 74, 107, 0.15) 0%, transparent 60%),
-          radial-gradient(circle at 85% 20%, rgba(59, 89, 152, 0.12) 0%, transparent 50%),
-          radial-gradient(circle at 50% 90%, rgba(74, 111, 165, 0.1) 0%, transparent 60%),
-          radial-gradient(circle at 20% 80%, rgba(42, 61, 107, 0.08) 0%, transparent 40%)
+          radial-gradient(circle at 15% 40%, rgba(59, 89, 152, 0.18) 0%, transparent 60%),
+          radial-gradient(circle at 85% 20%, rgba(46, 74, 107, 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 50% 90%, rgba(91, 123, 199, 0.12) 0%, transparent 60%),
+          radial-gradient(circle at 20% 80%, rgba(74, 111, 165, 0.1) 0%, transparent 40%)
         `,
         zIndex: 1,
       },
@@ -87,11 +87,11 @@ const HomePage = () => {
           py: 6,
           px: 3,
           mb: 6,
-          background: 'linear-gradient(135deg, rgba(245, 247, 250, 0.95) 0%, rgba(232, 236, 244, 0.9) 100%)',
+          background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.95) 0%, rgba(227, 234, 243, 0.9) 100%)',
           backdropFilter: 'blur(25px)',
           borderRadius: '24px',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
-          boxShadow: '0 25px 45px rgba(46, 74, 107, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+          border: '1px solid rgba(255, 255, 255, 0.4)',
+          boxShadow: '0 25px 45px rgba(46, 74, 107, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
           position: 'relative',
           overflow: 'hidden',
           '&::before': {
@@ -109,7 +109,7 @@ const HomePage = () => {
             inset: '1px',
             borderRadius: '23px',
             padding: '1px',
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1))',
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.8), rgba(227, 234, 243, 0.3))',
             mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
             maskComposite: 'xor',
             WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
@@ -150,9 +150,9 @@ const HomePage = () => {
             height: '65px',
             background: 'linear-gradient(45deg, #2E4A6B, #4A6FA5)',
             borderRadius: '16px',
-            opacity: 0.2,
+            opacity: 0.25,
             animation: 'float 6s ease-in-out infinite',
-            boxShadow: '0 8px 20px rgba(46, 74, 107, 0.3)',
+            boxShadow: '0 8px 20px rgba(46, 74, 107, 0.4)',
           }} />
           <Box sx={{
             position: 'absolute',
@@ -162,9 +162,9 @@ const HomePage = () => {
             height: '45px',
             background: 'linear-gradient(45deg, #3B5998, #5B7BC7)',
             borderRadius: '50%',
-            opacity: 0.25,
+            opacity: 0.3,
             animation: 'float 8s ease-in-out infinite reverse',
-            boxShadow: '0 6px 15px rgba(59, 89, 152, 0.3)',
+            boxShadow: '0 6px 15px rgba(59, 89, 152, 0.4)',
           }} />
         </Box>
         
@@ -177,11 +177,11 @@ const HomePage = () => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              background: 'linear-gradient(135deg, rgba(245, 247, 250, 0.9) 0%, rgba(232, 236, 244, 0.85) 100%)',
+              background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.92) 0%, rgba(227, 234, 243, 0.88) 100%)',
               backdropFilter: 'blur(25px)',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              border: '1px solid rgba(255, 255, 255, 0.35)',
               borderRadius: '20px',
-              boxShadow: '0 20px 40px rgba(46, 74, 107, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
+              boxShadow: '0 20px 40px rgba(46, 74, 107, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
               transition: 'all 0.3s ease',
               position: 'relative',
               overflow: 'hidden',
@@ -192,7 +192,7 @@ const HomePage = () => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: 'linear-gradient(135deg, rgba(46, 74, 107, 0.03) 0%, rgba(74, 111, 165, 0.08) 100%)',
+                background: 'linear-gradient(135deg, rgba(46, 74, 107, 0.04) 0%, rgba(74, 111, 165, 0.1) 100%)',
                 zIndex: 1,
               },
               '& > *': {
@@ -201,8 +201,8 @@ const HomePage = () => {
               },
               '&:hover': {
                 transform: 'translateY(-8px)',
-                boxShadow: '0 30px 60px rgba(46, 74, 107, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
-                border: '1px solid rgba(255, 255, 255, 0.4)',
+                boxShadow: '0 30px 60px rgba(46, 74, 107, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.7)',
+                border: '1px solid rgba(255, 255, 255, 0.5)',
               },
             }}>
               <Box sx={{
@@ -267,11 +267,11 @@ const HomePage = () => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              background: 'linear-gradient(135deg, rgba(245, 247, 250, 0.9) 0%, rgba(232, 236, 244, 0.85) 100%)',
+              background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.92) 0%, rgba(227, 234, 243, 0.88) 100%)',
               backdropFilter: 'blur(25px)',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              border: '1px solid rgba(255, 255, 255, 0.35)',
               borderRadius: '20px',
-              boxShadow: '0 20px 40px rgba(59, 89, 152, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
+              boxShadow: '0 20px 40px rgba(59, 89, 152, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
               transition: 'all 0.3s ease',
               position: 'relative',
               overflow: 'hidden',
@@ -282,7 +282,7 @@ const HomePage = () => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: 'linear-gradient(135deg, rgba(59, 89, 152, 0.03) 0%, rgba(91, 123, 199, 0.08) 100%)',
+                background: 'linear-gradient(135deg, rgba(59, 89, 152, 0.04) 0%, rgba(91, 123, 199, 0.1) 100%)',
                 zIndex: 1,
               },
               '& > *': {
@@ -291,8 +291,8 @@ const HomePage = () => {
               },
               '&:hover': {
                 transform: 'translateY(-8px)',
-                boxShadow: '0 30px 60px rgba(59, 89, 152, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
-                border: '1px solid rgba(255, 255, 255, 0.4)',
+                boxShadow: '0 30px 60px rgba(59, 89, 152, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.7)',
+                border: '1px solid rgba(255, 255, 255, 0.5)',
               },
             }}>
               <Box sx={{
@@ -364,17 +364,17 @@ const HomePage = () => {
             <Grid item xs={12} md={4}>
               <Box sx={{
                 p: 3,
-                background: 'linear-gradient(135deg, rgba(245, 247, 250, 0.8) 0%, rgba(232, 236, 244, 0.9) 100%)',
+                background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.85) 0%, rgba(227, 234, 243, 0.92) 100%)',
                 backdropFilter: 'blur(25px)',
                 borderRadius: '16px',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
+                border: '1px solid rgba(255, 255, 255, 0.4)',
                 height: '100%',
-                boxShadow: '0 15px 30px rgba(46, 74, 107, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                boxShadow: '0 15px 30px rgba(46, 74, 107, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
                 transition: 'all 0.3s ease',
                 '&:hover': {
                   transform: 'translateY(-6px)',
-                  boxShadow: '0 20px 40px rgba(46, 74, 107, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
-                  border: '1px solid rgba(255, 255, 255, 0.4)',
+                  boxShadow: '0 20px 40px rgba(46, 74, 107, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
+                  border: '1px solid rgba(255, 255, 255, 0.5)',
                 },
               }}>
                 <Typography variant="h6" sx={{ color: '#1A2332', mb: 2, fontWeight: 600 }}>
@@ -388,17 +388,17 @@ const HomePage = () => {
             <Grid item xs={12} md={4}>
               <Box sx={{
                 p: 3,
-                background: 'linear-gradient(135deg, rgba(245, 247, 250, 0.8) 0%, rgba(232, 236, 244, 0.9) 100%)',
+                background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.85) 0%, rgba(227, 234, 243, 0.92) 100%)',
                 backdropFilter: 'blur(25px)',
                 borderRadius: '16px',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
+                border: '1px solid rgba(255, 255, 255, 0.4)',
                 height: '100%',
-                boxShadow: '0 15px 30px rgba(46, 74, 107, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                boxShadow: '0 15px 30px rgba(46, 74, 107, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
                 transition: 'all 0.3s ease',
                 '&:hover': {
                   transform: 'translateY(-6px)',
-                  boxShadow: '0 20px 40px rgba(46, 74, 107, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
-                  border: '1px solid rgba(255, 255, 255, 0.4)',
+                  boxShadow: '0 20px 40px rgba(46, 74, 107, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
+                  border: '1px solid rgba(255, 255, 255, 0.5)',
                 },
               }}>
                 <Typography variant="h6" sx={{ color: '#1A2332', mb: 2, fontWeight: 600 }}>
@@ -412,17 +412,17 @@ const HomePage = () => {
             <Grid item xs={12} md={4}>
               <Box sx={{
                 p: 3,
-                background: 'linear-gradient(135deg, rgba(245, 247, 250, 0.8) 0%, rgba(232, 236, 244, 0.9) 100%)',
+                background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.85) 0%, rgba(227, 234, 243, 0.92) 100%)',
                 backdropFilter: 'blur(25px)',
                 borderRadius: '16px',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
+                border: '1px solid rgba(255, 255, 255, 0.4)',
                 height: '100%',
-                boxShadow: '0 15px 30px rgba(46, 74, 107, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                boxShadow: '0 15px 30px rgba(46, 74, 107, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
                 transition: 'all 0.3s ease',
                 '&:hover': {
                   transform: 'translateY(-6px)',
-                  boxShadow: '0 20px 40px rgba(46, 74, 107, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
-                  border: '1px solid rgba(255, 255, 255, 0.4)',
+                  boxShadow: '0 20px 40px rgba(46, 74, 107, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
+                  border: '1px solid rgba(255, 255, 255, 0.5)',
                 },
               }}>
                 <Typography variant="h6" sx={{ color: '#1A2332', mb: 2, fontWeight: 600 }}>
@@ -449,7 +449,7 @@ const Footer = () => {
         py: 2,
         mt: 'auto',
         textAlign: 'center',
-        background: 'linear-gradient(135deg, rgba(245, 247, 250, 0.95) 0%, rgba(232, 236, 244, 0.9) 100%)',
+        background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.95) 0%, rgba(227, 234, 243, 0.92) 100%)',
         backdropFilter: 'blur(25px)',
         color: '#3D4852',
         borderTop: '1px solid rgba(255, 255, 255, 0.3)',
