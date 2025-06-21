@@ -12,22 +12,22 @@ import DiskSchedulerApp from './components/DiskScheduler/App';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#2E4A6B',
-      light: '#4A6FA5',
-      dark: '#1A2B40',
+      main: '#2D4A8F',
+      light: '#4A6EC7',
+      dark: '#1A2B5C',
     },
     secondary: {
-      main: '#3B5998',
-      light: '#5B7BC7',
-      dark: '#2A3D6B',
+      main: '#6B46C1',
+      light: '#8B5CF6',
+      dark: '#553C9A',
     },
     background: {
-      default: '#E3EAF3',
-      paper: '#F0F5FB',
+      default: '#E0E7FF',
+      paper: '#EEF2FF',
     },
     text: {
-      primary: '#1A2332',
-      secondary: '#3D4852',
+      primary: '#1E1B4B',
+      secondary: '#4C1D95',
     },
   },
   typography: {
@@ -48,7 +48,7 @@ const theme = createTheme({
           fontWeight: 600,
           boxShadow: 'none',
           '&:hover': {
-            boxShadow: '0 8px 25px rgba(46, 74, 107, 0.3)',
+            boxShadow: '0 8px 25px rgba(45, 74, 143, 0.35)',
           },
         },
       },
@@ -61,7 +61,7 @@ const HomePage = () => {
   return (
     <Box sx={{ 
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #C8D5E8 0%, #A8BDD8 25%, #8AA8CC 50%, #6B93C0 75%, #4D7EB4 100%)',
+      background: 'linear-gradient(135deg, #A5B4FC 0%, #818CF8 20%, #6366F1 40%, #8B5CF6 60%, #A855F7 80%, #C084FC 100%)',
       position: 'relative',
       overflow: 'hidden',
       '&::before': {
@@ -72,11 +72,22 @@ const HomePage = () => {
         right: 0,
         bottom: 0,
         background: `
-          radial-gradient(circle at 15% 40%, rgba(59, 89, 152, 0.18) 0%, transparent 60%),
-          radial-gradient(circle at 85% 20%, rgba(46, 74, 107, 0.15) 0%, transparent 50%),
-          radial-gradient(circle at 50% 90%, rgba(91, 123, 199, 0.12) 0%, transparent 60%),
-          radial-gradient(circle at 20% 80%, rgba(74, 111, 165, 0.1) 0%, transparent 40%)
+          radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.25) 0%, transparent 60%),
+          radial-gradient(circle at 80% 15%, rgba(99, 102, 241, 0.22) 0%, transparent 50%),
+          radial-gradient(circle at 50% 85%, rgba(168, 85, 247, 0.2) 0%, transparent 65%),
+          radial-gradient(circle at 15% 70%, rgba(129, 140, 248, 0.18) 0%, transparent 45%),
+          radial-gradient(circle at 85% 60%, rgba(192, 132, 252, 0.15) 0%, transparent 50%)
         `,
+        zIndex: 1,
+      },
+      '&::after': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'linear-gradient(180deg, rgba(165, 180, 252, 0.1) 0%, rgba(192, 132, 252, 0.15) 100%)',
         zIndex: 1,
       },
     }}>
@@ -87,11 +98,11 @@ const HomePage = () => {
           py: 6,
           px: 3,
           mb: 6,
-          background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.95) 0%, rgba(227, 234, 243, 0.9) 100%)',
-          backdropFilter: 'blur(25px)',
+          background: 'linear-gradient(135deg, rgba(238, 242, 255, 0.95) 0%, rgba(224, 231, 255, 0.92) 50%, rgba(219, 234, 254, 0.9) 100%)',
+          backdropFilter: 'blur(30px)',
           borderRadius: '24px',
-          border: '1px solid rgba(255, 255, 255, 0.4)',
-          boxShadow: '0 25px 45px rgba(46, 74, 107, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
+          border: '2px solid rgba(255, 255, 255, 0.5)',
+          boxShadow: '0 25px 50px rgba(99, 102, 241, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
           position: 'relative',
           overflow: 'hidden',
           '&::before': {
@@ -100,16 +111,16 @@ const HomePage = () => {
             top: 0,
             left: 0,
             right: 0,
-            height: '3px',
-            background: 'linear-gradient(90deg, transparent 0%, #2E4A6B 20%, #4A6FA5 40%, #3B5998 60%, #5B7BC7 80%, transparent 100%)',
+            height: '4px',
+            background: 'linear-gradient(90deg, transparent 0%, #8B5CF6 15%, #6366F1 30%, #8B5CF6 45%, #A855F7 60%, #C084FC 75%, transparent 100%)',
           },
           '&::after': {
             content: '""',
             position: 'absolute',
-            inset: '1px',
-            borderRadius: '23px',
-            padding: '1px',
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.8), rgba(227, 234, 243, 0.3))',
+            inset: '2px',
+            borderRadius: '22px',
+            padding: '2px',
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.9), rgba(224, 231, 255, 0.4))',
             mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
             maskComposite: 'xor',
             WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
@@ -117,7 +128,7 @@ const HomePage = () => {
           },
         }}>
           <Typography variant="h2" component="h1" gutterBottom sx={{ 
-            background: 'linear-gradient(135deg, #1A2332 0%, #2E4A6B 30%, #3B5998 70%, #2A3D6B 100%)',
+            background: 'linear-gradient(135deg, #1E1B4B 0%, #2D4A8F 25%, #6B46C1 50%, #8B5CF6 75%, #A855F7 100%)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             color: 'transparent',
@@ -125,12 +136,12 @@ const HomePage = () => {
             fontWeight: 800,
             letterSpacing: '-0.025em',
             mb: 2,
-            textShadow: '0 2px 4px rgba(46, 74, 107, 0.1)',
+            textShadow: '0 2px 4px rgba(99, 102, 241, 0.2)',
           }}>
             OS Scheduling Visualizers
           </Typography>
           <Typography variant="h6" sx={{ 
-            color: '#3D4852',
+            color: '#4C1D95',
             mb: 4,
             maxWidth: '650px',
             mx: 'auto',
@@ -144,27 +155,39 @@ const HomePage = () => {
           {/* Animated floating elements */}
           <Box sx={{
             position: 'absolute',
-            top: '15%',
-            left: '8%',
-            width: '65px',
-            height: '65px',
-            background: 'linear-gradient(45deg, #2E4A6B, #4A6FA5)',
-            borderRadius: '16px',
-            opacity: 0.25,
+            top: '12%',
+            left: '6%',
+            width: '70px',
+            height: '70px',
+            background: 'linear-gradient(45deg, #6366F1, #8B5CF6)',
+            borderRadius: '18px',
+            opacity: 0.35,
             animation: 'float 6s ease-in-out infinite',
-            boxShadow: '0 8px 20px rgba(46, 74, 107, 0.4)',
+            boxShadow: '0 10px 25px rgba(99, 102, 241, 0.5)',
           }} />
           <Box sx={{
             position: 'absolute',
             top: '65%',
-            right: '12%',
-            width: '45px',
-            height: '45px',
-            background: 'linear-gradient(45deg, #3B5998, #5B7BC7)',
+            right: '10%',
+            width: '50px',
+            height: '50px',
+            background: 'linear-gradient(45deg, #A855F7, #C084FC)',
             borderRadius: '50%',
-            opacity: 0.3,
+            opacity: 0.4,
             animation: 'float 8s ease-in-out infinite reverse',
-            boxShadow: '0 6px 15px rgba(59, 89, 152, 0.4)',
+            boxShadow: '0 8px 20px rgba(168, 85, 247, 0.5)',
+          }} />
+          <Box sx={{
+            position: 'absolute',
+            top: '30%',
+            right: '8%',
+            width: '35px',
+            height: '35px',
+            background: 'linear-gradient(45deg, #818CF8, #A5B4FC)',
+            borderRadius: '8px',
+            opacity: 0.3,
+            animation: 'float 7s ease-in-out infinite',
+            boxShadow: '0 6px 15px rgba(129, 140, 248, 0.4)',
           }} />
         </Box>
         
@@ -177,11 +200,11 @@ const HomePage = () => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.92) 0%, rgba(227, 234, 243, 0.88) 100%)',
-              backdropFilter: 'blur(25px)',
-              border: '1px solid rgba(255, 255, 255, 0.35)',
+              background: 'linear-gradient(135deg, rgba(238, 242, 255, 0.95) 0%, rgba(224, 231, 255, 0.92) 50%, rgba(219, 234, 254, 0.9) 100%)',
+              backdropFilter: 'blur(30px)',
+              border: '2px solid rgba(255, 255, 255, 0.4)',
               borderRadius: '20px',
-              boxShadow: '0 20px 40px rgba(46, 74, 107, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
+              boxShadow: '0 20px 45px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.7)',
               transition: 'all 0.3s ease',
               position: 'relative',
               overflow: 'hidden',
@@ -192,7 +215,7 @@ const HomePage = () => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: 'linear-gradient(135deg, rgba(46, 74, 107, 0.04) 0%, rgba(74, 111, 165, 0.1) 100%)',
+                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, rgba(139, 92, 246, 0.12) 100%)',
                 zIndex: 1,
               },
               '& > *': {
@@ -201,25 +224,25 @@ const HomePage = () => {
               },
               '&:hover': {
                 transform: 'translateY(-8px)',
-                boxShadow: '0 30px 60px rgba(46, 74, 107, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.7)',
-                border: '1px solid rgba(255, 255, 255, 0.5)',
+                boxShadow: '0 30px 65px rgba(99, 102, 241, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
+                border: '2px solid rgba(255, 255, 255, 0.6)',
               },
             }}>
               <Box sx={{
                 width: '80px',
                 height: '80px',
                 borderRadius: '20px',
-                background: 'linear-gradient(135deg, #2E4A6B 0%, #4A6FA5 100%)',
+                background: 'linear-gradient(135deg, #2D4A8F 0%, #4A6EC7 50%, #6366F1 100%)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 mb: 3,
-                boxShadow: '0 12px 25px rgba(46, 74, 107, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                boxShadow: '0 15px 30px rgba(45, 74, 143, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
               }}>
                 <Typography sx={{ fontSize: '2rem', color: 'white' }}>⚡</Typography>
               </Box>
               <Typography variant="h4" gutterBottom sx={{ 
-                color: '#1A2332',
+                color: '#1E1B4B',
                 fontWeight: 700,
                 mb: 3,
                 textAlign: 'center',
@@ -229,7 +252,7 @@ const HomePage = () => {
               <Typography sx={{ 
                 mb: 4, 
                 textAlign: 'center',
-                color: '#3D4852',
+                color: '#4C1D95',
                 lineHeight: 1.6,
                 fontSize: '1.1rem',
               }}>
@@ -246,11 +269,11 @@ const HomePage = () => {
                   px: 4,
                   fontWeight: 600,
                   fontSize: '1.1rem',
-                  background: 'linear-gradient(135deg, #2E4A6B 0%, #4A6FA5 100%)',
-                  boxShadow: '0 10px 25px rgba(46, 74, 107, 0.3)',
+                  background: 'linear-gradient(135deg, #2D4A8F 0%, #4A6EC7 50%, #6366F1 100%)',
+                  boxShadow: '0 12px 30px rgba(45, 74, 143, 0.4)',
                   borderRadius: '12px',
                   '&:hover': {
-                    boxShadow: '0 15px 35px rgba(46, 74, 107, 0.4)',
+                    boxShadow: '0 18px 40px rgba(45, 74, 143, 0.5)',
                     transform: 'translateY(-2px)',
                   },
                 }}
@@ -267,11 +290,11 @@ const HomePage = () => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.92) 0%, rgba(227, 234, 243, 0.88) 100%)',
-              backdropFilter: 'blur(25px)',
-              border: '1px solid rgba(255, 255, 255, 0.35)',
+              background: 'linear-gradient(135deg, rgba(238, 242, 255, 0.95) 0%, rgba(224, 231, 255, 0.92) 50%, rgba(219, 234, 254, 0.9) 100%)',
+              backdropFilter: 'blur(30px)',
+              border: '2px solid rgba(255, 255, 255, 0.4)',
               borderRadius: '20px',
-              boxShadow: '0 20px 40px rgba(59, 89, 152, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
+              boxShadow: '0 20px 45px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.7)',
               transition: 'all 0.3s ease',
               position: 'relative',
               overflow: 'hidden',
@@ -282,7 +305,7 @@ const HomePage = () => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: 'linear-gradient(135deg, rgba(59, 89, 152, 0.04) 0%, rgba(91, 123, 199, 0.1) 100%)',
+                background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(168, 85, 247, 0.12) 100%)',
                 zIndex: 1,
               },
               '& > *': {
@@ -291,25 +314,25 @@ const HomePage = () => {
               },
               '&:hover': {
                 transform: 'translateY(-8px)',
-                boxShadow: '0 30px 60px rgba(59, 89, 152, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.7)',
-                border: '1px solid rgba(255, 255, 255, 0.5)',
+                boxShadow: '0 30px 65px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
+                border: '2px solid rgba(255, 255, 255, 0.6)',
               },
             }}>
               <Box sx={{
                 width: '80px',
                 height: '80px',
                 borderRadius: '20px',
-                background: 'linear-gradient(135deg, #3B5998 0%, #5B7BC7 100%)',
+                background: 'linear-gradient(135deg, #6B46C1 0%, #8B5CF6 50%, #A855F7 100%)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 mb: 3,
-                boxShadow: '0 12px 25px rgba(59, 89, 152, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                boxShadow: '0 15px 30px rgba(107, 70, 193, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
               }}>
                 <Typography sx={{ fontSize: '2rem', color: 'white' }}>💿</Typography>
               </Box>
               <Typography variant="h4" gutterBottom sx={{ 
-                color: '#1A2332',
+                color: '#1E1B4B',
                 fontWeight: 700,
                 mb: 3,
                 textAlign: 'center',
@@ -319,7 +342,7 @@ const HomePage = () => {
               <Typography sx={{ 
                 mb: 4, 
                 textAlign: 'center',
-                color: '#3D4852',
+                color: '#4C1D95',
                 lineHeight: 1.6,
                 fontSize: '1.1rem',
               }}>
@@ -336,11 +359,11 @@ const HomePage = () => {
                   px: 4,
                   fontWeight: 600,
                   fontSize: '1.1rem',
-                  background: 'linear-gradient(135deg, #3B5998 0%, #5B7BC7 100%)',
-                  boxShadow: '0 10px 25px rgba(59, 89, 152, 0.3)',
+                  background: 'linear-gradient(135deg, #6B46C1 0%, #8B5CF6 50%, #A855F7 100%)',
+                  boxShadow: '0 12px 30px rgba(107, 70, 193, 0.4)',
                   borderRadius: '12px',
                   '&:hover': {
-                    boxShadow: '0 15px 35px rgba(59, 89, 152, 0.4)',
+                    boxShadow: '0 18px 40px rgba(107, 70, 193, 0.5)',
                     transform: 'translateY(-2px)',
                   },
                 }}
@@ -354,7 +377,7 @@ const HomePage = () => {
         {/* Features Section */}
         <Box sx={{ mt: 6, textAlign: 'center' }}>
           <Typography variant="h5" sx={{ 
-            color: '#1A2332',
+            color: '#1E1B4B',
             fontWeight: 700,
             mb: 4,
           }}>
@@ -364,23 +387,23 @@ const HomePage = () => {
             <Grid item xs={12} md={4}>
               <Box sx={{
                 p: 3,
-                background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.85) 0%, rgba(227, 234, 243, 0.92) 100%)',
-                backdropFilter: 'blur(25px)',
+                background: 'linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(224, 231, 255, 0.95) 100%)',
+                backdropFilter: 'blur(30px)',
                 borderRadius: '16px',
-                border: '1px solid rgba(255, 255, 255, 0.4)',
+                border: '2px solid rgba(255, 255, 255, 0.5)',
                 height: '100%',
-                boxShadow: '0 15px 30px rgba(46, 74, 107, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
+                boxShadow: '0 15px 35px rgba(99, 102, 241, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
                 transition: 'all 0.3s ease',
                 '&:hover': {
                   transform: 'translateY(-6px)',
-                  boxShadow: '0 20px 40px rgba(46, 74, 107, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
-                  border: '1px solid rgba(255, 255, 255, 0.5)',
+                  boxShadow: '0 25px 50px rgba(99, 102, 241, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.7)',
+                  border: '2px solid rgba(255, 255, 255, 0.7)',
                 },
               }}>
-                <Typography variant="h6" sx={{ color: '#1A2332', mb: 2, fontWeight: 600 }}>
+                <Typography variant="h6" sx={{ color: '#1E1B4B', mb: 2, fontWeight: 600 }}>
                   🎯 Interactive Learning
                 </Typography>
-                <Typography sx={{ color: '#3D4852' }}>
+                <Typography sx={{ color: '#4C1D95' }}>
                   Step through algorithms with real-time visualizations and detailed explanations
                 </Typography>
               </Box>
@@ -388,23 +411,23 @@ const HomePage = () => {
             <Grid item xs={12} md={4}>
               <Box sx={{
                 p: 3,
-                background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.85) 0%, rgba(227, 234, 243, 0.92) 100%)',
-                backdropFilter: 'blur(25px)',
+                background: 'linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(224, 231, 255, 0.95) 100%)',
+                backdropFilter: 'blur(30px)',
                 borderRadius: '16px',
-                border: '1px solid rgba(255, 255, 255, 0.4)',
+                border: '2px solid rgba(255, 255, 255, 0.5)',
                 height: '100%',
-                boxShadow: '0 15px 30px rgba(46, 74, 107, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
+                boxShadow: '0 15px 35px rgba(139, 92, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
                 transition: 'all 0.3s ease',
                 '&:hover': {
                   transform: 'translateY(-6px)',
-                  boxShadow: '0 20px 40px rgba(46, 74, 107, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
-                  border: '1px solid rgba(255, 255, 255, 0.5)',
+                  boxShadow: '0 25px 50px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.7)',
+                  border: '2px solid rgba(255, 255, 255, 0.7)',
                 },
               }}>
-                <Typography variant="h6" sx={{ color: '#1A2332', mb: 2, fontWeight: 600 }}>
+                <Typography variant="h6" sx={{ color: '#1E1B4B', mb: 2, fontWeight: 600 }}>
                   📊 Performance Metrics
                 </Typography>
-                <Typography sx={{ color: '#3D4852' }}>
+                <Typography sx={{ color: '#4C1D95' }}>
                   Compare algorithms with detailed performance statistics and efficiency metrics
                 </Typography>
               </Box>
@@ -412,23 +435,23 @@ const HomePage = () => {
             <Grid item xs={12} md={4}>
               <Box sx={{
                 p: 3,
-                background: 'linear-gradient(135deg, rgba(240, 245, 251, 0.85) 0%, rgba(227, 234, 243, 0.92) 100%)',
-                backdropFilter: 'blur(25px)',
+                background: 'linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(224, 231, 255, 0.95) 100%)',
+                backdropFilter: 'blur(30px)',
                 borderRadius: '16px',
-                border: '1px solid rgba(255, 255, 255, 0.4)',
+                border: '2px solid rgba(255, 255, 255, 0.5)',
                 height: '100%',
-                boxShadow: '0 15px 30px rgba(46, 74, 107, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
+                boxShadow: '0 15px 35px rgba(168, 85, 247, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
                 transition: 'all 0.3s ease',
                 '&:hover': {
                   transform: 'translateY(-6px)',
-                  boxShadow: '0 20px 40px rgba(46, 74, 107, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
-                  border: '1px solid rgba(255, 255, 255, 0.5)',
+                  boxShadow: '0 25px 50px rgba(168, 85, 247, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.7)',
+                  border: '2px solid rgba(255, 255, 255, 0.7)',
                 },
               }}>
-                <Typography variant="h6" sx={{ color: '#1A2332', mb: 2, fontWeight: 600 }}>
+                <Typography variant="h6" sx={{ color: '#1E1B4B', mb: 2, fontWeight: 600 }}>
                   🔧 Customizable
                 </Typography>
-                <Typography sx={{ color: '#3D4852' }}>
+                <Typography sx={{ color: '#4C1D95' }}>
                   Input your own process parameters and see how different scenarios affect performance
                 </Typography>
               </Box>
