@@ -30,7 +30,7 @@ An interactive web application for visualizing CPU and Disk scheduling algorithm
 
 1. Clone this repository
 ```
-git clone https://github.com/harshitbhatt18/OS-Scheduler.git
+git clone https://github.com/SanchitNegi177/AlgoViz.git
 cd OS-Scheduler
 ```
 
