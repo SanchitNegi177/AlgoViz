@@ -11,7 +11,7 @@ An interactive web application for visualizing CPU and Disk scheduling algorithm
   - Shortest Job First (SJF)
   - Priority Scheduling
   - Round Robin
-- Real-time view of the ready queue
+- Real-time view of the ready-queue
 - Ability to compare different algorithms side by side
 
 ### Disk Scheduler
